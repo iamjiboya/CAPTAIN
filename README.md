@@ -27,12 +27,12 @@ CAPTAIN is implemented based on Pytorch. We use pytorch-2.1.2 and cuda-12.8. Oth
 
     This command will create a new conda environment with all the necessary dependencies and configurations as specified in the `environment.yml` file, guaranteeing a complete and reproducible environment for optimal performance of the model.
 
-3.  **Activate the environment:** Once the environment is created, activate it using the following command (replace `<your_env_name>` with the actual name of the environment created, which is usually derived from the `name` field in `environment.yml`):
+3.  **Activate the environment:** Once the environment is created, activate it using the following command:
 
     ```bash
     conda activate captain
     ```
-4.  Alternatively, for users who prefer using pip, we have also included a `requirements.txt` file. This file lists the necessary Python packages required to run the model.
+Alternatively, for users who prefer using pip, we have also included a `requirements.txt` file. This file lists the necessary Python packages required to run the model.
 
     ```bash
     pip install -r requirements.txt
