@@ -63,7 +63,7 @@ Within each model's download folder, you will also find:
 
 ## Token Dictionaries
 
-The following table describes the token dictionary files included in this repository, which are essential for understanding the input and output representations of our model:
+The following table describes the token dictionary files included in this repository, which are essential for understanding the input and output representations of our model(You can find these files in the [token_dict](https://github.com/iamjiboya/CAPTAIN/blob/main/token_dict) folder.):
 
 | Filename               | Description                                                                                                                                                           |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
