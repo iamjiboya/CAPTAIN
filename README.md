@@ -44,7 +44,7 @@ For accelerated training, we also leverage FlashAttention. We specifically utili
 
 Please be aware that the `flash-attn` dependency often requires specific GPU hardware and CUDA versions. Therefore, for detailed and up-to-date installation instructions tailored to your system, please refer directly to the official `flash-attn` repository: https://github.com/Dao-AILab/flash-attention/tree/main.
 
-## Download Checkpoints
+## Pretrained CAPTAIN Model
 
 We introduce CAPTAIN, a multimodal foundational model pretrained on over four million single cells with concurrently measured transcriptomes and a curated repertoire of 387 surface proteins across diverse human and mouse tissues. You can download the pretrained model checkpoints below. Place the downloaded model directory in the main path (e.g., `./pretrained_models/CAPTAIN_Base`, `./pretrained_models/CAPTAIN_PBMC`, `./pretrained_models/CAPTAIN_Human`).
 
