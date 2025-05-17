@@ -60,3 +60,14 @@ Within each model's download folder, you will also find:
 
 * **Gene ID Dictionary:** This dictionary maps gene symbols to numerical IDs, referencing the vocabulary used in [scGPT](https://github.com/bowang-lab/scGPT).
 * **Cell Surface Protein Dictionary:** This dictionary maps 387 cell surface protein names to numerical IDs, compiled and curated manually by our team.
+
+## Token Dictionaries
+
+The following table describes the token dictionary files included in this repository, which are essential for understanding the input and output representations of our model:
+
+| Filename               | Description                                                                                                                                                           |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `human_mouse_align.pickle` | Provides a mapping for converting gene names between human and mouse, crucial for cross-species analyses and comparisons.                                          |
+| `adt_align_dict.pickle`  | Facilitates the alignment and conversion of Antibody-Derived Tag (ADT) names to our standardized nomenclature used within the model.                                |
+| `adt_token_dict.pickle`  | Contains the vocabulary for the 387 Antibody-Derived Tags (ADTs) used in our model, mapping each ADT name to its corresponding numerical ID within the token space. |
+| `vocab.json`           | Serves as the vocabulary for gene names, mapping gene symbols to their respective numerical IDs within the token space. Derived from scGPT, encompassing 60,693 human genes. |
