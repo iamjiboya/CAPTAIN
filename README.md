@@ -39,7 +39,24 @@ Alternatively, for users who prefer using pip, we have also included a `requirem
     
 **Notes on FlashAttention for Accelerated Training:**
 
+
 For accelerated training, we also leverage FlashAttention. We specifically utilize FlashAttention-2 and recommend CUDA 12.8 for optimal performance.
 
 Please be aware that the `flash-attn` dependency often requires specific GPU hardware and CUDA versions. Therefore, for detailed and up-to-date installation instructions tailored to your system, please refer directly to the official `flash-attn` repository: https://github.com/Dao-AILab/flash-attention/tree/main.
 
+## Download Checkpoints
+
+We introduce CAPTAIN, a multimodal foundational model pretrained on over four million single cells with concurrently measured transcriptomes and a curated repertoire of 387 surface proteins across diverse human and mouse tissues. You can download the pretrained model checkpoints below. Place the downloaded model directory in the main path (e.g., `./pretrained_models/CAPTAIN_Small`, `./pretrained_models/CAPTAIN_Base`).
+
+
+| Model            | Description                   | Download |
+|------------------|-------------------------------|----------|
+| `GeneCompass_Small` | Pretrained on 6-layer GeneCompass. | [Link](https://www.google.com/search?q=YOUR_SMALL_MODEL_DOWNLOAD_LINK_HERE) |
+| `GeneCompass_Base`  | Pretrained on 12-layer GeneCompass. | [Link](YOUR_BASE_MODEL_DOWNLOAD_LINK_HERE)  |
+
+**Gene and Surface Protein Dictionaries:**
+
+Within each model's download folder, you will also find:
+
+* **Gene ID Dictionary:** This dictionary maps gene symbols to numerical IDs, referencing the vocabulary used in [scGPT](https://github.com/bowang-lab/scGPT).
+* **Cell Surface Protein Dictionary:** This dictionary maps 387 cell surface protein names to numerical IDs, compiled and curated manually by our team.
