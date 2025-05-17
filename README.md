@@ -51,9 +51,8 @@ We introduce CAPTAIN, a multimodal foundational model pretrained on over four mi
 | Model             | Description                                                                                                                                                                                             | Download |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | `CAPTAIN_Base`    | Base model pretrained on the complete dataset, encompassing diverse human and mouse tissues.                                                                                                          | [Link](YOUR_CAPTAIN_BASE_DOWNLOAD_LINK_HERE)    |
-| `CAPTAIN_PBMC`    | Model specifically pretrained on Peripheral Blood Mononuclear Cell (PBMC) data, which is prevalent within the pretraining dataset. 
-| [Link](YOUR_CAPTAIN_PBMC_DOWNLOAD_LINK_HERE)    |
-| `CAPTAIN_Human`   | Model specifically pretrained on human single-cell data, which constitutes a significant proportion of the pretraining dataset.                                 | [Link](YOUR_CAPTAIN_HUMAN_DOWNLOAD_LINK_HERE)   |
+| `CAPTAIN_PBMC`    | Model specifically pretrained on Peripheral Blood Mononuclear Cell (PBMC) data, which is prevalent within the pretraining dataset. | [Link](YOUR_CAPTAIN_PBMC_DOWNLOAD_LINK_HERE)    |
+| `CAPTAIN_Human`   | Model specifically pretrained on human single-cell data, which constitutes a significant proportion of the pretraining dataset.                                 | [Link](YOUR_CAPTAIN_HUMAN_DOWNLOAD_LINK_HERE)|
 
 **Gene and Surface Protein Dictionaries:**
 
