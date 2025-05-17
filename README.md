@@ -37,5 +37,9 @@ Alternatively, for users who prefer using pip, we have also included a `requirem
     
     pip install -r requirements.txt
     
+**Notes on FlashAttention for Accelerated Training:**
 
+For accelerated training, we leverage FlashAttention. We specifically utilize FlashAttention-2 and recommend CUDA 12.8 for optimal performance.
+
+Please be aware that the `flash-attn` dependency often requires specific GPU hardware and CUDA versions. Therefore, for detailed and up-to-date installation instructions tailored to your system, please refer directly to the official `flash-attn` repository: [https://github.com/Dao-AILab/flash-attention/tree/main]
 
