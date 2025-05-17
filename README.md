@@ -66,3 +66,10 @@ The following table describes the token dictionary files included in this reposi
 | `csp_align_dict.pickle`  | Facilitates the alignment and conversion of cell surface protein names to our standardized nomenclature used within the model.                                |
 | `csp_token_dict.pickle`  | Contains the vocabulary for the 387 cell surface proteins used in our model, mapping each protein name to its corresponding numerical ID within the token space. |
 | `vocab.json`           | Serves as the vocabulary for gene names, mapping gene symbols to their respective numerical IDs within the token space. Derived from scGPT, encompassing 60,693 human genes. |
+
+## Data Preprocessing
+
+
+The data preprocessing steps applied to the multimodal single-cell RNA and Protein data. The preprocessing pipeline reads a MuData object, processes the RNA and Protein modalities independently, ensures that only cells with measurements in both modalities are retained, and then saves the processed MuData object (You can find these files in the [token_dict](https://github.com/iamjiboya/CAPTAIN/blob/main/preprocess) folder).
+
+
