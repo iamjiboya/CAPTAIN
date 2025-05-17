@@ -46,13 +46,13 @@ Please be aware that the `flash-attn` dependency often requires specific GPU har
 
 ## Download Checkpoints
 
-We introduce CAPTAIN, a multimodal foundational model pretrained on over four million single cells with concurrently measured transcriptomes and a curated repertoire of 387 surface proteins across diverse human and mouse tissues. You can download the pretrained model checkpoints below. Place the downloaded model directory in the main path (e.g., `./pretrained_models/CAPTAIN_Small`, `./pretrained_models/CAPTAIN_Base`).
+We introduce CAPTAIN, a multimodal foundational model pretrained on over four million single cells with concurrently measured transcriptomes and a curated repertoire of 387 surface proteins across diverse human and mouse tissues. You can download the pretrained model checkpoints below. Place the downloaded model directory in the main path (e.g., `./pretrained_models/CAPTAIN_Base`, `./pretrained_models/CAPTAIN_PBMC`, `./pretrained_models/CAPTAIN_Human`).
 
-
-| Model            | Description                   | Download |
-|------------------|-------------------------------|----------|
-| `GeneCompass_Small` | Pretrained on 6-layer GeneCompass. | [Link](https://www.google.com/search?q=YOUR_SMALL_MODEL_DOWNLOAD_LINK_HERE) |
-| `GeneCompass_Base`  | Pretrained on 12-layer GeneCompass. | [Link](YOUR_BASE_MODEL_DOWNLOAD_LINK_HERE)  |
+| Model             | Description                                                                                                                                                                                             | Download |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| `CAPTAIN_Base`    | Base model pretrained on the complete dataset, encompassing diverse human and mouse tissues.                                                                                                          | [Link](YOUR_CAPTAIN_BASE_DOWNLOAD_LINK_HERE)    |
+| `CAPTAIN_PBMC`    | Model specifically pretrained on Peripheral Blood Mononuclear Cell (PBMC) data. This model is provided due to the prevalence of PBMC data within the pretraining dataset.                             | [Link](YOUR_CAPTAIN_PBMC_DOWNLOAD_LINK_HERE)    |
+| `CAPTAIN_Human`   | Model specifically pretrained on human single-cell data. This model is provided due to the significant proportion of human data within the pretraining dataset.                                         | [Link](YOUR_CAPTAIN_HUMAN_DOWNLOAD_LINK_HERE)   |
 
 **Gene and Surface Protein Dictionaries:**
 
