@@ -70,6 +70,6 @@ The following table describes the token dictionary files included in this reposi
 ## Data Preprocessing
 
 
-The data preprocessing steps applied to the multimodal single-cell RNA and Protein data. The preprocessing pipeline reads a MuData object, processes the RNA and Protein modalities independently, ensures that only cells with measurements in both modalities are retained, and then saves the processed MuData object (You can find these files in the [token_dict](https://github.com/iamjiboya/CAPTAIN/blob/main/preprocess) folder).
+The data preprocessing steps applied to the multimodal single-cell RNA and Protein data. The preprocessing pipeline reads a MuData object, processes the RNA and Protein modalities independently, ensures that only cells with measurements in both modalities are retained, and then saves the processed MuData object (You can find these files in the [preprocess](https://github.com/iamjiboya/CAPTAIN/blob/main/preprocess) folder).
 
 
