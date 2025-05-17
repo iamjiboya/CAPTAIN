@@ -34,7 +34,7 @@ CAPTAIN is implemented based on Pytorch. We use pytorch-2.1.2 and cuda-12.8. Oth
     ```
 Alternatively, for users who prefer using pip, we have also included a `requirements.txt` file. This file lists the necessary Python packages required to run the model.
 
-    ```bash
+    ```
     pip install -r requirements.txt
     ```
 
