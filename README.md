@@ -12,3 +12,25 @@
 
 Proteins act as the ultimate executors of cellular function, encoding the phenotypic consequences of genomic and transcriptomic programs. Although transcriptomic profiles serve as accessible proxies, they remain incomplete surrogates for the proteomic landscape that ultimately defines cellular phenotypes. Current single-cell foundation models, however, are trained exclusively on transcriptomes, resulting in biased and partial characterizations of cellular states. To address this limitation, we introduce CAPTAIN, a multimodal foundational model pretrained on over four million single cells with concurrently measured transcriptomes and a curated repertoire of 387 surface proteins across diverse human and mouse tissues. Our results show that CAPTAIN learns unified multimodal representations by modeling cross-modality dependencies and capturing the diversity of cellular states across complex biological contexts. CAPTAIN generalizes robustly across both fine-tuning and zero-shot settings, excelling in core downstream tasks such as protein imputation, cell type annotation, and batch harmonization. Beyond improved accuracy in multi-omics integration, CAPTAIN uncovers previously inaccessible mechanisms of protein-mediated intercellular dynamics, including immune interaction patterns linked to COVID-19 severity. CAPTAIN establishes a new paradigm for multimodal single-cell modeling, laying the foundation for comprehensive cellular understanding and virtual cell construction.
 ![Image text](https://github.com/iamjiboya/CAPTAIN/blob/main/img/CAPTAIN.png)
+#Installation
+
+We highly recommend using Anaconda to manage your Python environment. This ensures a consistent and reproducible setup for running our model. To create the recommended environment, please follow these steps:
+
+1.  **Install Anaconda:** If you haven't already, download and install Anaconda from the official website: [https://www.anaconda.com/download/](https://www.anaconda.com/download/)
+
+2.  **Create the environment:** Navigate to the root directory of this repository in your terminal or Anaconda Prompt. Then, execute the following command to create the environment based on the provided `environment.yml` file:
+
+    ```bash
+    conda env create -f environment.yml
+    ```
+
+    This command will create a new conda environment with all the necessary dependencies and configurations as specified in the `environment.yml` file, guaranteeing a complete and reproducible environment for optimal performance of the model.
+
+3.  **Activate the environment:** Once the environment is created, activate it using the following command (replace `<your_env_name>` with the actual name of the environment created, which is usually derived from the `name` field in `environment.yml`):
+
+    ```bash
+    conda activate <your_env_name>
+    ```
+
+    Now you have the correct environment set up and are ready to proceed with the subsequent steps.
+
