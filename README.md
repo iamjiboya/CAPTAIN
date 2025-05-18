@@ -101,7 +101,7 @@ torchrun --nproc_per_node=4 --master_port=29512 /home/jiboya/captain/pretrain/to
 ```
 ## Downstream Tasks
 ### Fine-tuning on Pre-trained Model for Cell-type Annotation
-In this [tutorial](https://github.com/iamjiboya/CAPTAIN/blob/main/preprocess), we demonstrate how to fine-tune the pre-trained model on a new dataset for the cell type annotation task. We use the Seurat 4 processed human peripheral blood mononuclear cells (PBMCs) dataset (GEO: GSE164378) as an example. Please download the dataset, fine-tuned models, generated feature files and predicted results from [Link](https://drive.google.com/drive/folders/1Gn7S4ERAJybhn28XMIDRhAtsRVo8cG65?usp=drive_link).
+In this [tutorial](https://github.com/iamjiboya/CAPTAIN/tree/main/downstream_tasks/cell_type_annotation), we demonstrate how to fine-tune the pre-trained model on a new dataset for the cell type annotation task. We use the Seurat 4 processed human peripheral blood mononuclear cells (PBMCs) dataset (GEO: GSE164378) as an example. Please download the dataset, fine-tuned models, generated feature files and predicted results from [Link](https://drive.google.com/drive/folders/1Gn7S4ERAJybhn28XMIDRhAtsRVo8cG65?usp=drive_link).
 
 ## Copyright Notice
 ### Code License
