@@ -115,6 +115,7 @@ Your use of the third-party software, libraries or code is subject to any such t
 This project utilizes and/or references the following libraries and packages:
 
 * scGPT
+* scFoundation
 * GeneCompass
 * scBert
 * liana+
