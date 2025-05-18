@@ -76,8 +76,8 @@ The following files contain the processed prior knowledge:
 
 | Filename                      | Description                                                                                                                              | Download |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| `final_human_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the human genome. | [Link](https://drive.google.com/drive/folders/1NE_MJQw6BliExH0l5OcpoJWe3MSJSgin?usp=drive_link)    |
-| `final_mouse_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the mouse genome. | [Link](https://drive.google.com/drive/folders/1NE_MJQw6BliExH0l5OcpoJWe3MSJSgin?usp=drive_link)    |
+| `final_human_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the human genome. | [Link](https://drive.google.com/file/d/1gnrq4UDhlBM9Hf8heo--RH7exwP7IUB0/view?usp=drive_link)    |
+| `final_mouse_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the mouse genome. | [Link](https://drive.google.com/file/d/18Sm69KL_LX8fOdDrMtFZE2hkuDZDhPS-/view?usp=drive_link)    |
 
 
 
