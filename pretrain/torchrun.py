@@ -1,3 +1,6 @@
+from rna_model import TransformerModel, AdversarialDiscriminator
+from protein_model import BLIP_Pretrain
+from protein_model.loss import masked_mse_loss, quantile_loss, masked_relative_error, criterion_neg_log_bernoulli
 import scanpy as sc
 import numpy as np
 import pandas as pd
@@ -30,9 +33,7 @@ from torch.nn import functional as F
 from torch.utils.data import Dataset, DataLoader
 sys.path.insert(0, "../")
 import scgpt as scg
-from scgpt.model import TransformerModel, AdversarialDiscriminator
 from scgpt.tokenizer import tokenize_and_pad_batch, random_mask_value
-from scgpt.loss import masked_mse_loss, quantile_loss, masked_relative_error, criterion_neg_log_bernoulli
 from scgpt.tokenizer.gene_tokenizer import GeneVocab
 from scgpt.preprocess import Preprocessor
 from scgpt import SubsetsBatchSampler
@@ -52,10 +53,10 @@ vocab_temp = read_json_file("/home/jiboya/captain/vocab.json")
 
 with open('/home/jiboya/captain/human_mouse_align.pickle', 'rb') as fp:
     human_mouse_align = pkl.load(fp)
-with open('/home/jiboya/captain/csp_token_dict.pickle', 'rb') as fp:
-    csp_token_dict = pkl.load(fp)
-with open('/home/jiboya/captain/csp_align_dict.pickle', 'rb') as fp:
-    csp_align_dict = pkl.load(fp)
+with open('/home/jiboya/captain/adt_token_dict.pickle', 'rb') as fp:
+    adt_token_dict = pkl.load(fp)
+with open('/home/jiboya/captain/adt_align_dict.pickle', 'rb') as fp:
+    adt_align_dict = pkl.load(fp)
 
 def preprocss_rna(data, species):
     sc.pp.filter_genes(data, min_counts=10)
@@ -71,19 +72,19 @@ def preprocss_rna(data, species):
         sys.exit()
     return data
 
-def preprocss_csp(data, species):
+def preprocss_adt(data, species):
     sc.pp.normalize_total(data)
     sc.pp.log1p(data)
     sc.pp.scale(data)
-    data.var = data.var.rename(index=csp_align_dict)
+    data.var = data.var.rename(index=adt_align_dict)
     data.var_names = data.var.index
     duplicated_genes = data.var_names.duplicated(keep='first')
     genes_to_keep = ~duplicated_genes
     data = data[:, genes_to_keep]
-    gene_name = list(csp_token_dict.keys())
-    csp_name = data.var.index.tolist()
-    common_elements = set(csp_name) & set(gene_name)
-    print("csp gene list presence in AnnData object", len(common_elements))
+    gene_name = list(adt_token_dict.keys())
+    adt_name = data.var.index.tolist()
+    common_elements = set(adt_name) & set(gene_name)
+    print("ADT gene list presence in AnnData object", len(common_elements))
     if len(common_elements) == 0:
         print("No matching proteins found, exiting program.")
         sys.exit()
@@ -119,11 +120,11 @@ def our_step_preporcess(adata, adata_protein, species):
     check_adata_x(adata)
     check_adata_x(adata_protein)
     rna_data_pre = preprocss_rna(adata, species=species)
-    csp_data_pre = preprocss_csp(adata_protein, species=species)
-    common_obs = rna_data_pre.obs_names.intersection(csp_data_pre.obs_names)
+    adt_data_pre = preprocss_adt(adata_protein, species=species)
+    common_obs = rna_data_pre.obs_names.intersection(adt_data_pre.obs_names)
     rna_data_pre = rna_data_pre[common_obs]
-    csp_data_pre = csp_data_pre[common_obs]
-    return rna_data_pre, csp_data_pre
+    adt_data_pre = adt_data_pre[common_obs]
+    return rna_data_pre, adt_data_pre
 
 def prepare_data_mouse(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
     masked_values_train = random_mask_value(
@@ -140,7 +141,7 @@ def prepare_data_mouse(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
         "gene_ids": input_gene_ids_train,
         "values": input_values_train,
         "target_values": target_values_train,
-        "csp_values": torch.tensor(adata_protein.X, dtype=torch.float32),
+        "adt_values": torch.tensor(adata_protein.X, dtype=torch.float32),
         "species_values": torch.ones_like(target_values_train).to(input_gene_ids_train.dtype),
     }
     return train_data_pt
@@ -160,7 +161,7 @@ def prepare_data_human(sort_seq_batch=False) -> Tuple[Dict[str, torch.Tensor]]:
         "gene_ids": input_gene_ids_train,
         "values": input_values_train,
         "target_values": target_values_train,
-        "csp_values": torch.tensor(adata_protein.X, dtype=torch.float32),
+        "adt_values": torch.tensor(adata_protein.X, dtype=torch.float32),
         "species_values": torch.zeros_like(target_values_train).to(input_gene_ids_train.dtype),
     }
     return train_data_pt
@@ -242,8 +243,8 @@ def train(model: nn.Module, loader: DataLoader) -> None:
         target_values = batch_data["target_values"].to(device)
         src_key_padding_mask = input_gene_ids.eq(vocab[pad_token])
         species_values = batch_data["species_values"].to(device)
-        csp_values = batch_data["csp_values"].to(device)
-        csp_data = torch.arange(0, csp_values.shape[1], device=csp_values.device).repeat(csp_values.shape[0], 1)
+        adt_values = batch_data["adt_values"].to(device)
+        adt_data = torch.arange(0, adt_values.shape[1], device=adt_values.device).repeat(adt_values.shape[0], 1)
         with torch.cuda.amp.autocast(enabled=config.amp):
             output_dict, transformer_out = model.module.rna_model(
                 input_gene_ids,
@@ -257,11 +258,11 @@ def train(model: nn.Module, loader: DataLoader) -> None:
                 ECS=ECS,
                 do_sample=do_sample_in_train,
             )
-            csp_embeddings, csp_to_out, csp_to_out_quantiles, csp_gene_atten, labels_csp_data, csp_mask = model.module.csp_model(
-                csp_data,
+            adt_embeddings, adt_to_out, adt_to_out_quantiles, adt_gene_atten, labels_adt_data, adt_mask = model.module.adt_model(
+                adt_data,
                 transformer_out,
                 src_key_padding_mask,
-                csp_values,
+                adt_values,
                 output_atten=False
             )
             masked_positions = input_values.eq(mask_value)
@@ -269,13 +270,13 @@ def train(model: nn.Module, loader: DataLoader) -> None:
             metrics_to_log = {}
             loss_weights = {
                 'mlm': 0.2,
-                "csp_mse": 0.6,
-                "csp_quantile": 0.2,
+                "adt_mse": 0.6,
+                "adt_quantile": 0.2,
             }
             loss_mlm = loss_weights["mlm"] * criterion(output_dict["mlm_output"], target_values, masked_positions)
-            loss_csp_mse = loss_weights["csp_mse"] * criterion(csp_to_out.squeeze(-1), labels_csp_data, csp_mask)
-            loss_csp_quantile = loss_weights["csp_quantile"] * criterion_quantile(csp_to_out_quantiles, labels_csp_data, csp_mask)
-            loss = loss_mlm + loss_csp_mse + loss_csp_quantile
+            loss_adt_mse = loss_weights["adt_mse"] * criterion(adt_to_out.squeeze(-1), labels_adt_data, adt_mask)
+            loss_adt_quantile = loss_weights["adt_quantile"] * criterion_quantile(adt_to_out_quantiles, labels_adt_data, adt_mask)
+            loss = loss_mlm + loss_adt_mse + loss_adt_quantile
         model.zero_grad()
         scaler.scale(loss).backward()
         scaler.unscale_(optimizer)
@@ -296,8 +297,8 @@ def train(model: nn.Module, loader: DataLoader) -> None:
         scaler.update()
         total_loss += loss.item()
         total_mse += loss_mlm.item()
-        total_cls += loss_csp_mse.item()
-        total_cce += loss_csp_quantile.item()
+        total_cls += loss_adt_mse.item()
+        total_cce += loss_adt_quantile.item()
         if batch % log_interval == 0 and batch > 0:
             lr = scheduler.get_last_lr()[0]
             ms_per_batch = (time.time() - start_time) * 1000 / log_interval
@@ -366,7 +367,7 @@ class CombinedModel(nn.Module):
     def __init__(self, main_model, sub_model):
         super(CombinedModel, self).__init__()
         self.rna_model = main_model
-        self.csp_model = sub_model
+        self.adt_model = sub_model
 
     def forward(self, x):
         pass
@@ -565,16 +566,15 @@ post_freeze_param_count = sum(dict((p.data_ptr(), p.numel()) for p in model.para
 print(f"Total Pre freeze Params {(pre_freeze_param_count )}")
 print(f"Total Post freeze Params {(post_freeze_param_count )}")
 print({"info/pre_freeze_param_count": pre_freeze_param_count, "info/post_freeze_param_count": post_freeze_param_count})
-
-from protein_model import BLIP_Pretrain
 print("Creating model")
-csp_model = BLIP_Pretrain(num_tokens2=387, csp_max_seq_len=387)
-#csp_model_state_dict = {
-#    k[len('module.csp_model.'):]: v for k, v in torch.load(model_file, map_location=device).items() if k.startswith('module.csp_model')
-#}
-#csp_model.load_state_dict(csp_model_state_dict)
+adt_model = BLIP_Pretrain(num_tokens2=387, adt_max_seq_len=387)
 
-model = CombinedModel(model, csp_model)
+#adt_model_state_dict = {
+#    k[len('module.adt_model.'):]: v for k, v in torch.load(model_file, map_location=device).items() if k.startswith('module.adt_model')
+#}
+#adt_model.load_state_dict(adt_model_state_dict)
+
+model = CombinedModel(model, adt_model)
 model.to(device)
 model = DDP(model, device_ids=[local_rank])
 
@@ -612,7 +612,7 @@ for k in range(epochs):
         print(file_name)
         a = mu.read_h5mu(fold_fold_1 + file_name)
         adata = a.mod["rna"]
-        adata_protein = a.mod["csp"]
+        adata_protein = a.mod["adt"]
         adata.var.set_index(adata.var.index, inplace=True)
         data_is_raw = True
         filter_gene_by_counts = False
@@ -688,7 +688,7 @@ for k in range(epochs):
         print(file_name)
         a = mu.read_h5mu(fold_fold_1 + file_name)
         adata = a.mod["rna"]
-        adata_protein = a.mod["csp"]
+        adata_protein = a.mod["adt"]
         adata.var.set_index(adata.var.index, inplace=True)
         data_is_raw = True
         filter_gene_by_counts = False
