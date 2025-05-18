@@ -86,9 +86,17 @@ The pre-training process can be initiated using the following command as an exam
 torchrun --nproc_per_node=4 --master_port=29512 /home/jiboya/captain/pretrain/torchrun.py --gpu 0,1,2,3
 ```
 
-## License
+## Copyright Notice
+### Code License
 
 This repository's source code is licensed under the Apache-2.0 License. However, please note that any use or exploitation of the Model Weights is subject to a separate Model License.
+### Third-party Software License
+
+Use of the third-party software, libraries or code referred to in the Acknowledgements section may be governed by separate terms and conditions or license provisions.
+
+Your use of the third-party software, libraries or code is subject to any such terms and you should check that you can comply with any applicable restrictions or terms and conditions before use.
+
+## Reference
 
 This project utilizes and/or references the following libraries and packages:
 
