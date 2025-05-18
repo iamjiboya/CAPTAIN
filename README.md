@@ -84,7 +84,7 @@ The pre-training process can be initiated using the following command as an exam
 
 ```bash
 torchrun --nproc_per_node=4 --master_port=29512 /home/jiboya/captain/pretrain/torchrun.py --gpu 0,1,2,3
-
+```
 
 ## License
 
@@ -92,25 +92,26 @@ This repository's source code is licensed under the Apache-2.0 License. However,
 
 This project utilizes and/or references the following libraries and packages:
 
-* scvi-tools
-* SAVER
-* DeepCDR
-* SCAD
-* GEARS
+* scGPT
+* GeneCompass
+* scBert
+* liana+
+* omicverse
 
 ## Acknowledgements
 
-We would like to thank the contributors and maintainers of the following libraries and packages that scFoundation uses and/or references (ordered alphabetically):
+We would like to thank the contributors and maintainers of the following libraries and packages that CAPTAIN uses and/or references:
 
-* DeepSpeed
-* Docker
-* einops
-* MMF
-* NumPy
-* Pandas
-* Pytorch
-* Pytorch Lightning
-* PyYAML
-* Scipy
-* Tqdm
+
+* muon
+* mudata
+* scanpy
+* anndata
+* numPy
+* pandas
+* torch
+* torchrun
+* pickle
+* r
+* tqdm
 
