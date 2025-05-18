@@ -115,11 +115,10 @@ We would like to thank the contributors and maintainers of the following librari
 * mudata
 * scanpy
 * anndata
-* numPy
-* pandas
+* flash-attention
+* scvi-tools
 * torch
 * torchrun
-* pickle
 * r
-* tqdm
+* transformers
 
