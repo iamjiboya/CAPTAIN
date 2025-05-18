@@ -72,4 +72,15 @@ The following table describes the token dictionary files included in this reposi
 
 The data preprocessing steps applied to the multimodal single-cell RNA and Protein data. The preprocessing pipeline reads a MuData object, processes the RNA and Protein modalities independently, ensures that only cells with measurements in both modalities are retained, and then saves the processed MuData object (You can find these files in the [preprocess](https://github.com/iamjiboya/CAPTAIN/blob/main/preprocess) folder).
 
+### Pre-training
 
+Our model undergoes a pre-training phase to learn foundational representations from large-scale multimodal single-cell datasets (You can find these files in the [pretrain](https://github.com/iamjiboya/CAPTAIN/blob/main/pretrain) folder). To accelerate this computationally intensive process, we employ **parallel training** across multiple GPUs.
+
+The transcriptional module within our model is initialized with weights from the pre-trained scGPT model. To begin, please download the scGPT model files as they are necessary for initializing the transcriptional component.
+
+**Running Pre-training:**
+
+The pre-training process can be initiated using the following command as an example. This command utilizes `torchrun` for distributed training:
+
+```bash
+torchrun --nproc_per_node=4 --master_port=29512 /home/jiboya/captain/pretrain/torchrun.py --gpu 0,1,2,3
