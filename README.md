@@ -67,6 +67,20 @@ The following table describes the token dictionary files included in this reposi
 | `csp_token_dict.pickle`  | Contains the vocabulary for the 387 cell surface proteins used in our model, mapping each protein name to its corresponding numerical ID within the token space. |
 | `vocab.json`           | Serves as the vocabulary for gene names, mapping gene symbols to their respective numerical IDs within the token space. Derived from scGPT, encompassing 60,693 human genes. |
 
+
+## Prior Knowledge
+
+Building upon the prior knowledge resources offered in the original [GeneCompass](https://github.com/xCompass-AI/GeneCompass), we have processed and refined these resources to provide species-specific gene prior knowledge for both human and mouse (You can find these files in the [prior_knowledge](https://github.com/iamjiboya/CAPTAIN/blob/main/prior_knowledge) folder).
+
+The following files contain the processed prior knowledge:
+
+| Filename                      | Description                                                                                                                              | Download |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| `final_human_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the human genome. | [Link](https://drive.google.com/drive/folders/1NE_MJQw6BliExH0l5OcpoJWe3MSJSgin?usp=drive_link)    |
+| `final_mouse_prior_knwo.npy`        | Contains processed gene prior knowledge specific to the mouse genome. | [Link](https://drive.google.com/drive/folders/1NE_MJQw6BliExH0l5OcpoJWe3MSJSgin?usp=drive_link)    |
+
+
+
 ## Data Preprocessing
 
 
