@@ -84,3 +84,33 @@ The pre-training process can be initiated using the following command as an exam
 
 ```bash
 torchrun --nproc_per_node=4 --master_port=29512 /home/jiboya/captain/pretrain/torchrun.py --gpu 0,1,2,3
+
+
+## License
+
+This repository's source code is licensed under the Apache-2.0 License. However, please note that any use or exploitation of the Model Weights is subject to a separate Model License.
+
+This project utilizes and/or references the following libraries and packages:
+
+* scvi-tools
+* SAVER
+* DeepCDR
+* SCAD
+* GEARS
+
+## Acknowledgements
+
+We would like to thank the contributors and maintainers of the following libraries and packages that scFoundation uses and/or references (ordered alphabetically):
+
+* DeepSpeed
+* Docker
+* einops
+* MMF
+* NumPy
+* Pandas
+* Pytorch
+* Pytorch Lightning
+* PyYAML
+* Scipy
+* Tqdm
+
