@@ -144,7 +144,7 @@ Cell-cell communication inference relies on the predicted expression of cell sur
 ## Copyright Notice
 ### Code License
 
-This repository's source code is licensed under the Apache-2.0 License. However, please note that any use or exploitation of the Model Weights is subject to a separate Model License.
+This repository's source code is licensed under the MIT License.
 ### Third-party Software License
 
 Use of the third-party software, libraries or code referred to in the Acknowledgements section may be governed by separate terms and conditions or license provisions.
